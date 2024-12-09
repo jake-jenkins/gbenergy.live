@@ -6,7 +6,7 @@ import GenerationCard from "@/components/GenerationCard";
 
 async function fetchData() {
   try {
-    const response = await fetch(`${process.env.HOSTNAME}/api`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api`);
     if (!response.ok) {
       throw new Error("Failed to fetch data");
     }
