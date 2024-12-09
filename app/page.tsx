@@ -6,7 +6,7 @@ import GenerationCard from "@/components/GenerationCard";
 
 async function fetchData() {
   try {
-    const response = await fetch(`${process.env.HOSTNAME || "http://localhost:3000"}/api`);
+    const response = await fetch(`${process.env.HOSTNAME}/api`);
     if (!response.ok) {
       throw new Error("Failed to fetch data");
     }
@@ -40,7 +40,7 @@ export default function PeriodicUpdatePage() {
     updateData();
     const intervalId = setInterval(updateData, 60000);
     return () => clearInterval(intervalId);
-  }, []); 
+  }, []);
 
   return (
     <div>
@@ -92,7 +92,10 @@ export default function PeriodicUpdatePage() {
               <h2 className="text-2xl mt-8 mb-4">
                 Total load {data.totals.total} GW
               </h2>
-              <p className="mb-4">Actual state at {new Date(data.updated).toLocaleTimeString().slice(0,5)}</p>
+              <p className="mb-4">
+                Actual state at{" "}
+                {new Date(data.updated).toLocaleTimeString().slice(0, 5)}
+              </p>
             </>
           )}
         </>
@@ -100,4 +103,3 @@ export default function PeriodicUpdatePage() {
     </div>
   );
 }
-
