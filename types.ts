@@ -39,8 +39,20 @@ export type GenerationSource = {
 export type AppEnergySource = {
     id: string,
     name: string,
-    type: "Fuel" | "Interconnector",
+    type: string,
     generation: number
+}
+
+export type GridAPIResponse = {
+    fuel: AppEnergySource[],
+    interconnectors: { imports: AppEnergySource[], exports: AppEnergySource[] },
+    totals: {
+        generation: string,
+        import: string,
+        export: string,
+        total: string
+    },
+    updated: string
 }
 
 export type Generation = GenerationSource[]
