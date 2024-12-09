@@ -36,4 +36,11 @@ export type GenerationSource = {
     generation: number
 }
 
+export type AppEnergySource = {
+    id: string,
+    name: string,
+    type: "Fuel" | "Interconnector",
+    generation: number
+}
+
 export type Generation = GenerationSource[]

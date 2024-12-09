@@ -1,5 +1,6 @@
 import { Grid } from "@/actions";
 import GenerationCard from "@/components/GenerationCard";
+import { AppEnergySource } from "@/types";
 
 export default async function Home() {
   const energy = await Grid();
@@ -8,7 +9,7 @@ export default async function Home() {
     <>
       <h2 className="text-2xl mb-2">Generation | {energy.totals.generation}</h2>
       <div className="grid grid-cols-3 lg:grid-cols-7 gap-2 mb-8">
-        {energy.fuel.map((source) => (
+        {energy.fuel.map((source: AppEnergySource) => (
           <GenerationCard
             key={source.id}
             name={source.name}
@@ -17,11 +18,9 @@ export default async function Home() {
         ))}
       </div>
 
-      <h2 className="text-2xl mb-2">
-        Imports: {energy.totals.import}
-      </h2>
+      <h2 className="text-2xl mb-2">Imports: {energy.totals.import}</h2>
       <div className="grid grid-cols-3 lg:grid-cols-7 gap-2 mb-4">
-        {energy.interconnectors.imports.map((source) => (
+        {energy.interconnectors.imports.map((source: AppEnergySource) => (
           <GenerationCard
             key={source.id}
             name={source.name}
@@ -30,12 +29,9 @@ export default async function Home() {
         ))}
       </div>
 
-      <h2 className="text-2xl mb-2">
-        Exports:{" "}
-        {energy.totals.export}
-      </h2>
+      <h2 className="text-2xl mb-2">Exports: {energy.totals.export}</h2>
       <div className="grid grid-cols-3 lg:grid-cols-7 gap-2">
-        {energy.interconnectors.exports.map((source) => (
+        {energy.interconnectors.exports.map((source: AppEnergySource) => (
           <GenerationCard
             key={source.id}
             name={source.name}
