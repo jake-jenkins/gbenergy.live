@@ -38,7 +38,7 @@ export const sourceData: SourceData = {
         type: "Interconnector"
     },
     NPSHYD: {
-        name: "Hyrdoelectric",
+        name: "Hyrdo",
         type: "Fuel"
     },
     OTHER: {
@@ -47,7 +47,7 @@ export const sourceData: SourceData = {
     },
     PS: {
         name: "Pumped storage",
-        type: "int"
+        type: "Fuel"
     },
     COAL: {
         name: "Coal",
@@ -55,7 +55,7 @@ export const sourceData: SourceData = {
     },
     INTELEC: {
         name: "idfk",
-        type: "int"
+        type: "Fuel"
     },
     INTGRNL: {
         name: "Ireland 1",
@@ -82,3 +82,7 @@ export const sourceData: SourceData = {
         type: "Interconnector"
     },
 }
+
+export const interconnectors = ["ireland", "france", "belgium", "norway", "denmark"];
+export const green = ["wind", "solar", "hydro", "nuclear", "biomass"];
+export const fossil = ["gas", "oil", "coal"]
