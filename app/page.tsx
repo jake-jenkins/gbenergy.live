@@ -63,7 +63,7 @@ export default function PeriodicUpdatePage() {
               <div className="grid grid-cols-3 lg:grid-cols-7 gap-2 mb-8">
                 
               {data.fossil.map((energy: Energy) => (
-                  <GenerationCard key={energy.name} obj={energy} />
+                  <GenerationCard key={energy.name} obj={energy} demmand={(data.totals.demmand / 1000)} />
                 ))}
 
               </div>
@@ -73,7 +73,7 @@ export default function PeriodicUpdatePage() {
               </h2>
               <div className="grid grid-cols-3 lg:grid-cols-7 gap-2 mb-8">
               {data.clean.map((energy: Energy) => (
-                  <GenerationCard key={energy.name} obj={energy} />
+                  <GenerationCard key={energy.name} obj={energy} demmand={(data.totals.demmand / 1000)} />
                 ))}
               </div>
 
@@ -83,7 +83,7 @@ export default function PeriodicUpdatePage() {
               <div className="grid grid-cols-3 lg:grid-cols-7 gap-2 mb-8">
 
               {data.imports.map((energy: Energy) => (
-                  <GenerationCard key={energy.name} obj={energy} />
+                  <GenerationCard key={energy.name} obj={energy} demmand={(data.totals.demmand / 1000)} />
                 ))}
 
               </div>
@@ -94,7 +94,7 @@ export default function PeriodicUpdatePage() {
               <div className="grid grid-cols-3 lg:grid-cols-7 gap-2 mb-8">
 
               {data.exports.map((energy: Energy) => (
-                  <GenerationCard key={energy.name} obj={energy} />
+                  <GenerationCard key={energy.name} obj={energy} demmand={(data.totals.demmand / 1000)} />
                 ))}
 
               </div>

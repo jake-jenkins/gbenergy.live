@@ -1,9 +1,11 @@
 import { Energy } from "@/types";
 
 export default function GenerationCard({
-  obj
+  obj,
+  demmand,
 }: {
-  obj: Energy
+  obj: Energy;
+  demmand: number;
 }) {
   return (
     <>
@@ -16,13 +18,13 @@ export default function GenerationCard({
           }
         >
           <p className="font-semibold text-sm">{obj.name} </p>
-          <p className="text-lg">{obj.pc}</p>
+          <p className="text-lg">{((obj.kw / demmand) * 100).toFixed(1)}%</p>
           <p className="text-sm"> {obj.kw.toFixed(2)} GW</p>
         </div>
       ) : (
         <div className="bg-slate-50 dark:bg-slate-900 p-1 flex flex-col items-center justify-center rounded-lg">
           <p className="text-sm text-opacity-90">{obj.name}</p>
-          <p className="text-lg">{obj.pc}</p>
+          <p className="text-lg">{((obj.kw / demmand) * 100).toFixed(1)}%</p>
           <p className="text-sm"> {obj.kw.toFixed(2)} GW</p>
         </div>
       )}

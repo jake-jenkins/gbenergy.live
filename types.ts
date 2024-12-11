@@ -76,8 +76,7 @@ export type GridAPIResponse = {
 
 export type Energy = {
     name: string,
-    kw: number,
-    pc: string
+    kw: number
 }
 export type Grid = {
     period: string,
