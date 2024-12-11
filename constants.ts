@@ -83,6 +83,6 @@ export const sourceData: SourceData = {
     },
 }
 
-export const interconnectors = ["ireland", "france", "belgium", "norway", "denmark", "storage"];
-export const green = ["wind", "solar", "hydro", "nuclear", "biomass"];
+export const interconnectors = ["ireland", "france", "belgium", "norway", "denmark"];
+export const green = ["wind", "solar", "hydro", "nuclear", "biomass", "storage", "other"];
 export const fossil = ["gas", "oil", "coal"]

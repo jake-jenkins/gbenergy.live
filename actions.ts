@@ -45,15 +45,15 @@ export async function GridAPI(): Promise<Grid> {
             nuclear,
             biomass,
             hydro,
-            other
+            other,
+            storage
         },
         interconnectors: {
             france,
             ireland,
             belgium,
             denmark,
-            norway,
-            storage
+            norway
         }
     }
 
