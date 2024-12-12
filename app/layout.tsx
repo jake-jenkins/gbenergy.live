@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Header from "@/components/Header";
 
 export const metadata: Metadata = {
-  title: "UK Energy Grid"
+  title: "GB energy.live"
 };
 
 export default function RootLayout({
@@ -13,7 +14,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="dark:bg-slate-950 dark:text-white">
-        <main className="mx-auto container p-4">
+        <Header />
+        <main className="mt-14 mx-auto container p-4">
         {children}
         </main>
       </body>

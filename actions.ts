@@ -1,7 +1,7 @@
 import { fossil, green, interconnectors } from "./constants";
 import { Energy, Generation, Grid } from "./types";
 
-export async function GridAPI(): Promise<Grid> {
+export async function LiveGridAPI(): Promise<Grid> {
     const coeff = 1000 * 60 * 5;
     const date = new Date();
     const timeTo = new Date(Math.floor(date.getTime() / coeff) * coeff);
@@ -124,4 +124,12 @@ export async function GridAPI(): Promise<Grid> {
     }
 
     return response;
+}
+
+export async function DailyGrid() {
+    const dataReq = await fetch("https://data.elexon.co.uk/bmrs/api/v1/generation/actual/per-type/day-total?format=json", {
+        next: { revalidate: 300 }
+    })
+    const data = await dataReq.json();
+    return data.sort((a, b) => a.twentyFourHourUsage - b.twentyFourHourUsage).reverse();
 }

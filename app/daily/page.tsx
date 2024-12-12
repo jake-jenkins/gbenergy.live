@@ -7,7 +7,7 @@ import GenerationCard from "@/components/GenerationCard";
 async function fetchData() {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_HOSTNAME}/api/live`
+      `${process.env.NEXT_PUBLIC_HOSTNAME}/api/daily`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch data");
@@ -19,9 +19,8 @@ async function fetchData() {
   }
 }
 
-export default function PeriodicUpdatePage() {
-  const [data, setData] = useState<Grid | undefined>(undefined);
-  // const [lastUpdated, setLastUpdated] = useState(new Date());
+export default function Page() {
+  const [data, setData] = useState<any[] | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
 
   const updateData = async () => {
@@ -29,7 +28,6 @@ export default function PeriodicUpdatePage() {
       const newData = await fetchData();
       if (newData) {
         setData(newData);
-        // setLastUpdated(new Date());
       }
     } catch (error) {
       console.error("Update failed:", error);
@@ -54,69 +52,58 @@ export default function PeriodicUpdatePage() {
         <>
           {data && (
             <>
-              <div className="text-center mb-6">
-                <h1 className="text-5xl">Live</h1>
-                <p>
-                  {data.period} - Demmand:{" "}
-                  {(data.totals.demmand / 1000).toFixed(2)} GW
-                </p>
+                            <div className="text-center mb-6">
+                <h1 className="text-5xl">24 Hours</h1>
               </div>
-
-              <h2 className="text-xl mb-2">
-                Fossil Fuels {(data.totals.fossil / 1000).toFixed(2)} GW
-              </h2>
               <div className="grid grid-cols-3 lg:grid-cols-7 gap-2 mb-8">
-                {data.fossil.map((energy: Energy) => (
+                {data.map((energy: any) => (
                   <GenerationCard
-                    key={energy.name}
-                    name={energy.name}
-                    gw={energy.kw}
-                    demmand={data.totals.demmand / 1000}
+                    key={energy.psrType}
+                  name={energy.psrType}
+                    gw={(energy.twentyFourHourUsage / 1000)}
+                    percent={energy.twentyFourHourPercentage}
                   />
                 ))}
               </div>
 
-              <h2 className="text-xl mb-2">
-                Carbon neutral {(data.totals.clean / 1000).toFixed(2)} GW
+              {/* <h2 className="text-xl mb-2">
+                Carbon neutral
               </h2>
               <div className="grid grid-cols-3 lg:grid-cols-7 gap-2 mb-8">
                 {data.clean.map((energy: Energy) => (
                   <GenerationCard
                     key={energy.name}
-                    name={energy.name}
-                    gw={energy.kw}
+                    obj={energy}
                     demmand={data.totals.demmand / 1000}
                   />
                 ))}
               </div>
 
               <h2 className="text-xl mb-2">
-                Imports {(data.totals.import / 1000).toFixed(2)} GW
+                Imports
               </h2>
               <div className="grid grid-cols-3 lg:grid-cols-7 gap-2 mb-8">
                 {data.imports.map((energy: Energy) => (
                   <GenerationCard
                     key={energy.name}
-                    name={energy.name}
-                    gw={energy.kw}
+                    obj={energy}
                     demmand={data.totals.demmand / 1000}
                   />
                 ))}
               </div>
 
               <h2 className="text-xl mb-2">
-                Exports {(data.totals.export / 1000).toFixed(2)} GW
+                Exports
               </h2>
               <div className="grid grid-cols-3 lg:grid-cols-7 gap-2 mb-8">
                 {data.exports.map((energy: Energy) => (
                   <GenerationCard
                     key={energy.name}
-                    name={energy.name}
-                    gw={energy.kw}
+                    obj={energy}
                     demmand={data.totals.demmand / 1000}
                   />
                 ))}
-              </div>
+              </div> */}
             </>
           )}
         </>
