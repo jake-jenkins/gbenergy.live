@@ -131,5 +131,6 @@ export async function DailyGrid() {
         next: { revalidate: 300 }
     })
     const data = await dataReq.json();
-    return data.sort((a, b) => a.twentyFourHourUsage - b.twentyFourHourUsage).reverse();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return data.sort((a: any, b: any) => a.twentyFourHourUsage - b.twentyFourHourUsage).reverse();
 }
