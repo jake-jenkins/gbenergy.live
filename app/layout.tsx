@@ -3,7 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 
 export const metadata: Metadata = {
-  title: "GB energy.live"
+  title: "GBenergy.live"
 };
 
 export default function RootLayout({

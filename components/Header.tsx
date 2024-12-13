@@ -6,10 +6,12 @@ import { usePathname } from "next/navigation";
 export default function Header() {
   const pathName = usePathname();
   return (
-    <div className="top-0 bg-indigo-950 py-2.5 fixed w-full">
+    <div className="top-0 bg-indigo-950 text-white py-2.5 fixed w-full">
       <header className="mx-auto container flex items-center px-2">
         <div>
-          <Link href="/" className="text-2xl">GB energy</Link>
+          <Link href="/" className="text-2xl">
+            GBenergy
+          </Link>
         </div>
         <div className="flex-1 text-end">
           <Link
