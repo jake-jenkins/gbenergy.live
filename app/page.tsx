@@ -59,7 +59,7 @@ export default function PeriodicUpdatePage() {
                 <p>{data.period}</p>
               </div>
 
-              <div className="grid grid-cols-3 mb-8 mx-auto md:w-1/2 gap-3">
+              <div className="grid grid-cols-3 mb-8 mx-auto md:w-1/2 gap-2">
                 <div className="text-center border py-2 rounded-l-lg">
                   <p className="text-xl">
                     {(data.totals.demmand / 1000).toFixed(1)} GW
