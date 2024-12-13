@@ -15,8 +15,8 @@ export default function GenerationCard({
         <div
           className={
             gw > 0
-              ? "bg-emerald-100 dark:bg-emerald-900 rounded-lg flex flex-col items-center justify-center p-4"
-              : "bg-rose-100 dark:bg-rose-900 rounded-lg flex flex-col items-center justify-center p-4"
+              ? "border-2 border-emerald-500 dark:border-emerald-900 rounded-lg flex flex-col items-center justify-center p-4"
+              : "border-2 border-rose-500 dark:border-rose-900 rounded-lg flex flex-col items-center justify-center p-4"
           }
         >
           <p className="text-2xl">{demmand ? <>{(gw / demmand * 100).toFixed()}</> : <>{percent}</>}%</p>

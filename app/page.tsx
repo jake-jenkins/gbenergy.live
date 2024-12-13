@@ -60,14 +60,14 @@ export default function PeriodicUpdatePage() {
               </div>
 
               <div className="grid grid-cols-3 mb-8 mx-auto md:w-1/2 gap-2">
-                <div className="text-center border py-2 rounded-l-lg">
+                <div className="text-center border border-black dark:border-white py-2 rounded-l-lg">
                   <p className="text-xl">
                     {(data.totals.demmand / 1000).toFixed(1)} GW
                   </p>
                   <p>Demmand</p>
                 </div>
 
-                <div className="text-center border py-2">
+                <div className="text-center border border-black dark:border-white py-2">
                   <p className="text-xl">
                     {(
                       (data.totals.import /
@@ -80,7 +80,7 @@ export default function PeriodicUpdatePage() {
                   <p>Imports</p>
                 </div>
 
-                <div className="text-center border py-2 rounded-r-lg">
+                <div className="text-center border border-black dark:border-white py-2 rounded-r-lg">
                   <p className="text-xl">
                     {(
                       (data.totals.generation /
@@ -104,7 +104,7 @@ export default function PeriodicUpdatePage() {
                 ).toFixed()}
                 %{" "}
                 <span className="text-sm">
-                  {(data.totals.fossil / 1000).toFixed(2)} GW
+                  {(data.totals.fossil / 1000).toFixed()} GW
                 </span>
               </h2>
               <div className="grid grid-cols-3 lg:grid-cols-7 gap-2 mb-8">
@@ -119,14 +119,14 @@ export default function PeriodicUpdatePage() {
               </div>
 
               <h2 className="text-xl mb-2">
-                Carbon neutral{" "}
+                Cleaner Energy{" "}
                 {(
                   (data.totals.clean / 1000 / (data.totals.generation / 1000)) *
                   100
                 ).toFixed()}
                 %{" "}
                 <span className="text-sm">
-                  {(data.totals.clean / 1000).toFixed(2)} GW
+                  {(data.totals.clean / 1000).toFixed()} GW
                 </span>
               </h2>
               <div className="grid grid-cols-3 lg:grid-cols-7 gap-2 mb-8">
@@ -141,8 +141,8 @@ export default function PeriodicUpdatePage() {
               </div>
 
               <h2 className="text-xl mb-2">
-                Imports {(data.totals.import / 1000).toFixed(2)}GW / Exports{" "}
-                {(data.totals.export / 1000).toFixed(2)}GW
+                Imports {(data.totals.import / 1000).toFixed()}GW / Exports{" "}
+                {(data.totals.export / 1000).toFixed()}GW
               </h2>
               <div className="grid grid-cols-3 lg:grid-cols-7 gap-2 mb-8">
                 {data.imports.map((energy: Energy) => (

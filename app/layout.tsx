@@ -13,9 +13,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="dark:bg-slate-950 dark:text-white">
+      <body className="dark:bg-zinc-900 dark:text-white">
         <Header />
-        <main className="mt-14 mx-auto container p-4">
+        <main className="mt-16 mx-auto container p-4">
         {children}
         </main>
       </body>
