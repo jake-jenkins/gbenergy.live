@@ -84,7 +84,7 @@ export type Grid = {
     fossil: Energy[],
     imports: Energy[],
     exports: Energy[],
-    totals: { import: number, export: number, clean: number, fossil: number, demmand: number }
+    totals: { generation: number, import: number, export: number, clean: number, fossil: number, demmand: number }
   }
 
 export type Generation = GenerationSource[]

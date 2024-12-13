@@ -116,6 +116,7 @@ export async function LiveGridAPI(): Promise<Grid> {
         exports: exportsArray.sort((a, b) => a.kw - b.kw),
         totals: {
             demmand: importTotal + cleanTotalB + fossilTotalB,
+            generation: cleanTotalB + fossilTotalB,
             import: importTotal,
             export: exportTotal,
             clean: cleanTotalB,

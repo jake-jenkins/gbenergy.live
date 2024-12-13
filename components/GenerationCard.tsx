@@ -19,7 +19,7 @@ export default function GenerationCard({
               : "bg-rose-100 dark:bg-rose-900 rounded-lg flex flex-col items-center justify-center p-4"
           }
         >
-          <p className="text-2xl">{demmand ? <>{(gw / demmand * 100).toFixed(1)}</> : <>{percent}</>}%</p>
+          <p className="text-2xl">{demmand ? <>{(gw / demmand * 100).toFixed()}</> : <>{percent}</>}%</p>
           <p className="font-medium text-md text-center">{name}</p>
           <p className="text-sm"> {gw.toFixed(2)} GW</p>
         </div>
