@@ -9,6 +9,20 @@ async function updateDB(data: SourceObj) {
   });
 }
 
+function isImport(generation: number) {
+  if (generation > 0) {
+    return generation;
+  }
+  return 0;
+}
+
+function isExport(generation: number) {
+  if (generation < 0) {
+    return generation;
+  }
+  return 0;
+}
+
 async function makeDataObject(): Promise<SourceObj> {
   const coeff = 1000 * 60 * 5;
   const date = new Date();
@@ -24,6 +38,8 @@ async function makeDataObject(): Promise<SourceObj> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const sources: any = {};
 
+  const updated = new Date(generation[0].startTime);
+
   for (const source of generation) {
     sources[source.fuelType] = source.generation;
   }
@@ -31,11 +47,11 @@ async function makeDataObject(): Promise<SourceObj> {
   sources.UPDATE = generation[0].startTime;
   sources.FOSSILTOTAL = sources.OCGT + sources.CCGT + sources.OIL + sources.COAL;
   sources.GREENTOTAL = sources.WIND + sources.PS + sources.NPSHYD + sources.NUCLEAR + sources.BIOMASS;
-  sources.IMPORTTOTAL = sources.INTFR + sources.INTFR + sources.INTNEM + sources.INTVKL + sources.INTNSL;
-  sources.EXPORTTOTAL = 0;
+  sources.IMPORTTOTAL = isImport(sources.INTFR) + isImport(sources.INTVKL) + isImport(sources.INTNSL) + isImport(sources.INTNEM) + isImport(sources.INTIFA2) + isImport(sources.INTELEC) + isImport(sources.INTGRNL) + isImport(sources.INTNED) + isImport(sources.INTIRL) + isImport(sources.INTEW);
+  sources.EXPORTTOTAL = isExport(sources.INTFR) + isExport(sources.INTVKL) + isExport(sources.INTNSL) + isExport(sources.INTNEM) + isExport(sources.INTIFA2) + isExport(sources.INTELEC) + isExport(sources.INTGRNL) + isExport(sources.INTNED) + isExport(sources.INTIRL) + isExport(sources.INTEW);
   sources.GENERATIONTOTAL = sources.FOSSILTOTAL + sources.GREENTOTAL;
   sources.DEMMANDTOTAL = sources.FOSSILTOTAL + sources.GREENTOTAL + sources.IMPORTTOTAL;
-  sources.PERIOD = "";
+  sources.PERIOD = `${updated.getHours()}:${updated.getMinutes()} - ${updated.getHours()}:${(updated.getMinutes() + 5)}`
   return sources;
 }
 
