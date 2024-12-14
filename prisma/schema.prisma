@@ -14,25 +14,32 @@ datasource db {
 }
 
 model GridLive {
-  createdAt DateTime @id @default(now())
-  BIOMASS   Int
-  CCGT      Int
-  COAL      Int
-  INTELEC   Int
-  INTEW     Int
-  INTFR     Int
-  INTGRNL   Int
-  INTIFA2   Int
-  INTIRL    Int
-  INTNED    Int
-  INTNEM    Int
-  INTNSL    Int
-  INTVKL    Int
-  NPSHYD    Int
-  NUCLEAR   Int
-  OCGT      Int
-  OIL       Int
-  OTHER     Int
-  PS        Int
-  WIND      Int
+  UPDATE          DateTime @id @default(now())
+  PERIOD          String
+  BIOMASS         Int
+  CCGT            Int
+  COAL            Int
+  INTELEC         Int
+  INTEW           Int
+  INTFR           Int
+  INTGRNL         Int
+  INTIFA2         Int
+  INTIRL          Int
+  INTNED          Int
+  INTNEM          Int
+  INTNSL          Int
+  INTVKL          Int
+  NPSHYD          Int
+  NUCLEAR         Int
+  OCGT            Int
+  OIL             Int
+  OTHER           Int
+  PS              Int
+  WIND            Int
+  DEMMANDTOTAL    Int
+  GENERATIONTOTAL Int
+  GREENTOTAL      Int
+  FOSSILTOTAL     Int
+  IMPORTTOTAL     Int
+  EXPORTTOTAL     Int
 }

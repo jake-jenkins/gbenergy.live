@@ -90,6 +90,7 @@ export type Grid = {
 export type Generation = GenerationSource[];
 
 export type SourceObj = {
+    UPDATE: Date,
     WIND: number,
     NUCLEAR: number,
     CCGT: number,
@@ -110,4 +111,11 @@ export type SourceObj = {
     OIL: number,
     INTIRL: number,
     INTEW: number,
+    FOSSILTOTAL: number,
+    GREENTOTAL: number,
+    IMPORTTOTAL: number,
+    EXPORTTOTAL: number,
+    GENERATIONTOTAL: number,
+    DEMMANDTOTAL: number,
+    PERIOD: string
 }

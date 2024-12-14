@@ -23,7 +23,14 @@ async function makeDataObject(): Promise<SourceObj> {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const sources: any = {};
-  sources.createdAt = generation[0].startTime;
+  sources.UPDATE = generation[0].startTime;
+  sources.FOSSILTOTAL = 0;
+  sources.GREENTOTAL = 0;
+  sources.IMPORTTOTAL = 0;
+  sources.EXPORTTOTAL = 0;
+  sources.GENERATIONTOTAL = 0;
+  sources.DEMMANDTOTAL = 0;
+  sources.PERIOD = "";
   for (const source of generation) {
     sources[source.fuelType] = source.generation;
   }
