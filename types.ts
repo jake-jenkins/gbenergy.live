@@ -85,6 +85,29 @@ export type Grid = {
     imports: Energy[],
     exports: Energy[],
     totals: { generation: number, import: number, export: number, clean: number, fossil: number, demmand: number }
-  }
+}
 
-export type Generation = GenerationSource[]
+export type Generation = GenerationSource[];
+
+export type SourceObj = {
+    WIND: number,
+    NUCLEAR: number,
+    CCGT: number,
+    BIOMASS: number,
+    INTFR: number,
+    INTVKL: number,
+    INTNSL: number,
+    INTNEM: number,
+    INTIFA2: number,
+    NPSHYD: number,
+    OTHER: number,
+    PS: number,
+    COAL: number,
+    INTELEC: number,
+    INTGRNL: number,
+    INTNED: number,
+    OCGT: number,
+    OIL: number,
+    INTIRL: number,
+    INTEW: number,
+}
