@@ -104,18 +104,18 @@ export async function GET() {
         clean: {
             total: data.GREENTOTAL / 1000,
             percent: parseInt((data.GREENTOTAL / data.DEMMANDTOTAL * 100).toFixed()),
-            sources: cleanSources
+            sources: cleanSources.sort((a, b) => a.gw - b.gw).reverse()
         },
         fossil: {
             total: data.FOSSILTOTAL / 1000,
             percent: parseInt((data.FOSSILTOTAL / data.DEMMANDTOTAL * 100).toFixed()),
-            sources: fossilSources
+            sources: fossilSources.sort((a, b) => a.gw - b.gw).reverse()
         },
         interconnectors: {
             importTotal: data.IMPORTTOTAL / 1000,
             importPercent: parseInt((data.IMPORTTOTAL / data.DEMMANDTOTAL * 100).toFixed()),
             exportTotal: data.EXPORTTOTAL / 1000,
-            sources: interconnectorsSources
+            sources: interconnectorsSources.sort((a, b) => a.gw - b.gw).reverse()
         }
     }
 
