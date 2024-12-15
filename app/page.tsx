@@ -40,7 +40,7 @@ export default function PeriodicUpdatePage() {
 
   useEffect(() => {
     updateData();
-    const intervalId = setInterval(updateData, 60000);
+    const intervalId = setInterval(updateData, 20000);
     return () => clearInterval(intervalId);
   }, []);
 
@@ -61,7 +61,7 @@ export default function PeriodicUpdatePage() {
 
               <div className="grid grid-cols-3 mb-8 mx-auto md:w-1/2 gap-2">
                 <div className="text-center border border-black dark:border-white py-2 rounded-l-lg">
-                  <p className="text-xl">{data.demmand.toFixed(1)} GW</p>
+                  <p className="text-xl">{data.demmand.toFixed()} GW</p>
                   <p>Demmand</p>
                 </div>
 
