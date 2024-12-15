@@ -80,13 +80,6 @@ export default function PeriodicUpdatePage() {
                 </div>
               </div>
 
-              <div>
-                <h3>Percent bar</h3>
-                <div className="flex">
-                  <div className="bg-rose-400">Fossil</div>
-                </div>
-              </div>
-
               <h2 className="text-xl mb-2">
                 Fossil Fuels {data.fossil.percent}%{" "}
                 <span className="text-sm">
