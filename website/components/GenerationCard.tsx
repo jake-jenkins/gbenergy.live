@@ -1,13 +1,11 @@
 export default function GenerationCard({
   name,
   gw,
-  percent,
-  demmand,
+  percent
 }: {
   name: string,
   gw: number,
-  percent?: string
-  demmand?: number;
+  percent: number
 }) {
   return (
     <>
@@ -19,7 +17,7 @@ export default function GenerationCard({
               : "border-2 border-rose-500 dark:border-rose-900 rounded-lg flex flex-col items-center justify-center p-4"
           }
         >
-          <p className="text-2xl">{demmand ? <>{(gw / demmand * 100).toFixed()}</> : <>{percent}</>}%</p>
+          <p className="text-2xl">{percent.toFixed()}%</p>
           <p className="font-medium text-md text-center">{name}</p>
           <p className="text-sm"> {gw.toFixed(2)} GW</p>
         </div>

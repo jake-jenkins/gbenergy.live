@@ -40,7 +40,7 @@ export default function PeriodicUpdatePage() {
 
   useEffect(() => {
     updateData();
-    const intervalId = setInterval(updateData, 60000);
+    const intervalId = setInterval(updateData, 20000);
     return () => clearInterval(intervalId);
   }, []);
 
@@ -61,105 +61,68 @@ export default function PeriodicUpdatePage() {
 
               <div className="grid grid-cols-3 mb-8 mx-auto md:w-1/2 gap-2">
                 <div className="text-center border border-black dark:border-white py-2 rounded-l-lg">
-                  <p className="text-xl">
-                    {(data.totals.demmand / 1000).toFixed(1)} GW
-                  </p>
+                  <p className="text-xl">{data.demmand.toFixed()} GW</p>
                   <p>Demmand</p>
                 </div>
 
                 <div className="text-center border border-black dark:border-white py-2">
                   <p className="text-xl">
-                    {(
-                      (data.totals.import /
-                        1000 /
-                        (data.totals.demmand / 1000)) *
-                      100
-                    ).toFixed()}
-                    %
+                    {data.interconnectors.importPercent}%
                   </p>
                   <p>Imports</p>
                 </div>
 
                 <div className="text-center border border-black dark:border-white py-2 rounded-r-lg">
                   <p className="text-xl">
-                    {(
-                      (data.totals.generation /
-                        1000 /
-                        (data.totals.demmand / 1000)) *
-                      100
-                    ).toFixed()}
-                    %
+                    {((data.generation / data.demmand) * 100).toFixed()}%
                   </p>
                   <p>Generation</p>
                 </div>
               </div>
 
               <h2 className="text-xl mb-2">
-                Fossil Fuels{" "}
-                {(
-                  (data.totals.fossil /
-                    1000 /
-                    (data.totals.generation / 1000)) *
-                  100
-                ).toFixed()}
-                %{" "}
+                Fossil Fuels {data.fossil.percent}%{" "}
                 <span className="text-sm">
-                  {(data.totals.fossil / 1000).toFixed()} GW
+                  {data.fossil.total.toFixed()} GW
                 </span>
               </h2>
               <div className="grid grid-cols-3 lg:grid-cols-7 gap-2 mb-8">
-                {data.fossil.map((energy: Energy) => (
+                {data.fossil.sources.map((energy: Energy) => (
                   <GenerationCard
                     key={energy.name}
                     name={energy.name}
-                    gw={energy.kw}
-                    demmand={data.totals.generation / 1000}
+                    gw={energy.gw}
+                    percent={energy.percent}
                   />
                 ))}
               </div>
 
               <h2 className="text-xl mb-2">
-                Cleaner Energy{" "}
-                {(
-                  (data.totals.clean / 1000 / (data.totals.generation / 1000)) *
-                  100
-                ).toFixed()}
-                %{" "}
-                <span className="text-sm">
-                  {(data.totals.clean / 1000).toFixed()} GW
-                </span>
+                Cleaner Energy {data.clean.percent}%{" "}
+                <span className="text-sm">{data.clean.total.toFixed()} GW</span>
               </h2>
               <div className="grid grid-cols-3 lg:grid-cols-7 gap-2 mb-8">
-                {data.clean.map((energy: Energy) => (
+                {data.clean.sources.map((energy: Energy) => (
                   <GenerationCard
                     key={energy.name}
                     name={energy.name}
-                    gw={energy.kw}
-                    demmand={data.totals.generation / 1000}
+                    gw={energy.gw}
+                    percent={energy.percent}
                   />
                 ))}
               </div>
 
               <h2 className="text-xl mb-2">
-                Imports {(data.totals.import / 1000).toFixed()}GW / Exports{" "}
-                {(data.totals.export / 1000).toFixed()}GW
+                Imports {data.interconnectors.importTotal.toFixed()} GW /
+                Exports {data.interconnectors.exportTotal.toFixed()} GW
               </h2>
               <div className="grid grid-cols-3 lg:grid-cols-7 gap-2 mb-8">
-                {data.imports.map((energy: Energy) => (
+                {data.interconnectors.sources.map((energy: Energy) => (
                   <GenerationCard
                     key={energy.name}
                     name={energy.name}
-                    gw={energy.kw}
-                    demmand={data.totals.demmand / 1000}
-                  />
-                ))}
-
-                {data.exports.map((energy: Energy) => (
-                  <GenerationCard
-                    key={energy.name}
-                    name={energy.name}
-                    gw={energy.kw}
-                    demmand={data.totals.demmand / 1000}
+                    gw={energy.gw}
+                    percent={energy.percent}
                   />
                 ))}
               </div>

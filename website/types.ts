@@ -76,15 +76,60 @@ export type GridAPIResponse = {
 
 export type Energy = {
     name: string,
-    kw: number
+    gw: number,
+    percent: number
 }
 export type Grid = {
     period: string,
-    clean: Energy[],
-    fossil: Energy[],
-    imports: Energy[],
-    exports: Energy[],
-    totals: { generation: number, import: number, export: number, clean: number, fossil: number, demmand: number }
-  }
+    demmand: number,
+    generation: number,
+    clean: {
+        total: number,
+        percent: number,
+        sources: Energy[]
+    },
+    fossil: {
+        total: number,
+        percent: number,
+        sources: Energy[]
+    },
+    interconnectors: {
+        importTotal: number,
+        importPercent: number,
+        exportTotal: number,
+        sources: Energy[]
+    }
+}
 
-export type Generation = GenerationSource[]
+export type Generation = GenerationSource[];
+
+export type SourceObj = {
+    UPDATE: Date,
+    WIND: number,
+    NUCLEAR: number,
+    CCGT: number,
+    BIOMASS: number,
+    INTFR: number,
+    INTVKL: number,
+    INTNSL: number,
+    INTNEM: number,
+    INTIFA2: number,
+    NPSHYD: number,
+    OTHER: number,
+    PS: number,
+    COAL: number,
+    INTELEC: number,
+    INTGRNL: number,
+    INTNED: number,
+    OCGT: number,
+    OIL: number,
+    INTIRL: number,
+    INTEW: number,
+    FOSSILTOTAL: number,
+    GREENTOTAL: number,
+    IMPORTTOTAL: number,
+    EXPORTTOTAL: number,
+    GENERATIONTOTAL: number,
+    DEMMANDTOTAL: number,
+    PERIOD: string
+}
