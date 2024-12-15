@@ -54,7 +54,7 @@ export const sourceData: SourceData = {
         type: "Fuel"
     },
     INTELEC: {
-        name: "idfk",
+        name: "France",
         type: "Fuel"
     },
     INTGRNL: {
