@@ -13,6 +13,9 @@ export async function GET() {
 
     const data = usage[0];
 
+    const franceTotal = data.INTELEC + data.INTIFA2 + data.INTFR;
+    const irishTotal = data.INTGRNL + data.INTEW + data.INTIRL;
+
     const cleanSources =
         [
             {
@@ -68,13 +71,13 @@ export async function GET() {
     const interconnectorsSources = [
         {
             name: "Ireland",
-            gw: data.INTGRNL + data.INTEW + data.INTIRL / 1000,
-            percent: data.INTGRNL + data.INTEW + data.INTIRL > 0 ? parseInt(((data.INTGRNL + data.INTEW + data.INTIRL) / data.DEMMANDTOTAL * 100).toFixed()) : 0
+            gw: irishTotal / 1000,
+            percent: irishTotal > 0 ? parseInt((irishTotal / data.DEMMANDTOTAL * 100).toFixed()) : 0
         },
         {
             name: "France",
-            gw: data.INTELEC + data.INTIFA2 + data.INTFR / 1000,
-            percent: data.INTELEC + data.INTIFA2 + data.INTFR > 0 ? parseInt(((data.INTELEC + data.INTIFA2 + data.INTFR) / data.DEMMANDTOTAL * 100).toFixed()) : 0
+            gw: franceTotal / 1000,
+            percent: franceTotal > 0 ? parseInt((franceTotal / data.DEMMANDTOTAL * 100).toFixed()) : 0
         },
         {
             name: "Norway",
