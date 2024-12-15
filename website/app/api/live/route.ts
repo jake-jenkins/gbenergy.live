@@ -15,6 +15,7 @@ export async function GET() {
 
     const franceTotal = data.INTELEC + data.INTIFA2 + data.INTFR;
     const irishTotal = data.INTGRNL + data.INTEW + data.INTIRL;
+    const gasTotal = data.CCGT + data.OCGT;
 
     const cleanSources =
         [
@@ -53,8 +54,8 @@ export async function GET() {
     const fossilSources = [
         {
             name: "Gas",
-            gw: data.OCGT + data.CCGT / 1000,
-            percent: parseInt((data.OCGT + data.CCGT / data.DEMMANDTOTAL * 100).toFixed())
+            gw: gasTotal / 1000,
+            percent: parseInt((gasTotal / data.DEMMANDTOTAL * 100).toFixed())
         },
         {
             name: "Oil",
