@@ -1,102 +1,134 @@
-import Image, { type ImageProps } from "next/image";
-import { Button } from "@repo/ui/button";
-import styles from "./page.module.css";
+"use client";
 
-type Props = Omit<ImageProps, "src"> & {
-  srcLight: string;
-  srcDark: string;
-};
+import React, { useState, useEffect } from "react";
+import type { Grid, Energy } from "@/types";
+import GenerationCard from "@/components/GenerationCard";
 
-const ThemeImage = (props: Props) => {
-  const { srcLight, srcDark, ...rest } = props;
+async function fetchData() {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_HOSTNAME}/api/live`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return null;
+  }
+}
+
+export default function PeriodicUpdatePage() {
+  const [data, setData] = useState<Grid | undefined>(undefined);
+  // const [lastUpdated, setLastUpdated] = useState(new Date());
+  const [isLoading, setIsLoading] = useState(true);
+
+  const updateData = async () => {
+    try {
+      const newData = await fetchData();
+      if (newData) {
+        setData(newData);
+        // setLastUpdated(new Date());
+      }
+    } catch (error) {
+      console.error("Update failed:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    updateData();
+    const intervalId = setInterval(updateData, 20000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
-    <>
-      <Image {...rest} src={srcLight} className="imgLight" />
-      <Image {...rest} src={srcDark} className="imgDark" />
-    </>
-  );
-};
-
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <ThemeImage
-          className={styles.logo}
-          srcLight="turborepo-dark.svg"
-          srcDark="turborepo-light.svg"
-          alt="Turborepo logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>apps/web/app/page.tsx</code>
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new/clone?demo-description=Learn+to+implement+a+monorepo+with+a+two+Next.js+sites+that+has+installed+three+local+packages.&demo-image=%2F%2Fimages.ctfassets.net%2Fe5382hct74si%2F4K8ZISWAzJ8X1504ca0zmC%2F0b21a1c6246add355e55816278ef54bc%2FBasic.png&demo-title=Monorepo+with+Turborepo&demo-url=https%3A%2F%2Fexamples-basic-web.vercel.sh%2F&from=templates&project-name=Monorepo+with+Turborepo&repository-name=monorepo-turborepo&repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fturborepo%2Ftree%2Fmain%2Fexamples%2Fbasic&root-directory=apps%2Fdocs&skippable-integrations=1&teamSlug=vercel&utm_source=create-turbo"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://turbo.build/repo/docs?utm_source"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+    <div>
+      {isLoading ? (
+        <div className="flex items-center justify-center min-h-dvh">
+          Loading...
         </div>
-        <Button appName="web" className={styles.secondary}>
-          Open alert
-        </Button>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com/templates?search=turborepo&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://turbo.build?utm_source=create-turbo"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to turbo.build →
-        </a>
-      </footer>
+      ) : (
+        <>
+          {data && (
+            <>
+              <div className="text-center mb-6">
+                <h1 className="text-5xl">Live</h1>
+                <p>{data.period}</p>
+              </div>
+
+              <div className="grid grid-cols-3 mb-8 mx-auto md:w-1/2 gap-2">
+                <div className="text-center border border-black dark:border-white py-2 rounded-l-lg">
+                  <p className="text-xl">{data.demmand.toFixed()} GW</p>
+                  <p>Demmand</p>
+                </div>
+
+                <div className="text-center border border-black dark:border-white py-2">
+                  <p className="text-xl">
+                    {data.interconnectors.importPercent}%
+                  </p>
+                  <p>Imports</p>
+                </div>
+
+                <div className="text-center border border-black dark:border-white py-2 rounded-r-lg">
+                  <p className="text-xl">
+                    {((data.generation / data.demmand) * 100).toFixed()}%
+                  </p>
+                  <p>Generation</p>
+                </div>
+              </div>
+
+              <h2 className="text-xl mb-2">
+                Fossil Fuels {data.fossil.percent}%{" "}
+                <span className="text-sm">
+                  {data.fossil.total.toFixed()} GW
+                </span>
+              </h2>
+              <div className="grid grid-cols-3 lg:grid-cols-7 gap-2 mb-8">
+                {data.fossil.sources.map((energy: Energy) => (
+                  <GenerationCard
+                    key={energy.name}
+                    name={energy.name}
+                    gw={energy.gw}
+                    percent={energy.percent}
+                  />
+                ))}
+              </div>
+
+              <h2 className="text-xl mb-2">
+                Cleaner Energy {data.clean.percent}%{" "}
+                <span className="text-sm">{data.clean.total.toFixed()} GW</span>
+              </h2>
+              <div className="grid grid-cols-3 lg:grid-cols-7 gap-2 mb-8">
+                {data.clean.sources.map((energy: Energy) => (
+                  <GenerationCard
+                    key={energy.name}
+                    name={energy.name}
+                    gw={energy.gw}
+                    percent={energy.percent}
+                  />
+                ))}
+              </div>
+
+              <h2 className="text-xl mb-2">
+                Imports {data.interconnectors.importPercent}% <span className="text-sm">{data.interconnectors.importTotal.toFixed()} GW</span>
+              </h2>
+              <div className="grid grid-cols-3 lg:grid-cols-7 gap-2 mb-8">
+                {data.interconnectors.sources.map((energy: Energy) => (
+                  <GenerationCard
+                    key={energy.name}
+                    name={energy.name}
+                    gw={energy.gw}
+                    percent={energy.percent}
+                  />
+                ))}
+              </div>
+            </>
+          )}
+        </>
+      )}
     </div>
   );
 }
