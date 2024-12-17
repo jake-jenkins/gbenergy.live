@@ -113,8 +113,7 @@ export default function PeriodicUpdatePage() {
               </div>
 
               <h2 className="text-xl mb-2">
-                Imports {data.interconnectors.importTotal.toFixed()} GW /
-                Exports {data.interconnectors.exportTotal.toFixed()} GW
+                Imports {data.interconnectors.importPercent}% <span className="text-sm">{data.interconnectors.importTotal.toFixed()} GW</span>
               </h2>
               <div className="grid grid-cols-3 lg:grid-cols-7 gap-2 mb-8">
                 {data.interconnectors.sources.map((energy: Energy) => (
