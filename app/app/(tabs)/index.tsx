@@ -1,11 +1,15 @@
-import React from 'react'
-import { View, Text } from 'react-native'
-import tw from "twrnc"
+import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
+import React from "react";
+
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
   return (
-    <View style={tw`bg-red-400`}>
-        <Text>Live</Text>
-    </View>
-  )
+    <SafeAreaView>
+      <ThemedView>
+        <ThemedText>Live</ThemedText>
+      </ThemedView>
+    </SafeAreaView>
+  );
 }

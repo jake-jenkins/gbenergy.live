@@ -1,10 +1,13 @@
-import { View, Text } from "react-native";
-import tw from "twrnc"
+import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Daily() {
-    return (
-      <View style={tw`bg-green-400`}>
-          <Text>24 Hours</Text>
-      </View>
-    )
-  }
+  return (
+    <SafeAreaView>
+      <ThemedView>
+        <ThemedText>24 Hours</ThemedText>
+      </ThemedView>
+    </SafeAreaView>
+  );
+}
