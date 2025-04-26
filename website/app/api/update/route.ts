@@ -53,6 +53,10 @@ async function makeDataObject(): Promise<SourceObj> {
   const sources: any = {};
 
   const startPeriod = new Date(generation[0].startTime);
+  if (process.env.isDST === "true") {
+    startPeriod.setHours(startPeriod.getHours() + 1);
+  };
+
   const endPeriod = new Date(startPeriod);
   endPeriod.setMinutes(startPeriod.getMinutes() + WINDOW)
 
