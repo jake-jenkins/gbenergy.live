@@ -13,6 +13,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+      <script defer src="https://analytics.jake.ac/script.js" data-website-id="e035f0fa-6045-4a14-b885-2349d54dd1b2"></script>
+      </head>
       <body className="dark:bg-zinc-900 dark:text-white">
         <Header />
         <main className="mt-16 mx-auto container p-4">
